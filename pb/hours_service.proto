@@ -1,0 +1,112 @@
+syntax = "proto3";
+
+package hours;
+
+import "hours_models.proto";
+
+option go_package = "github.com/fullstackatbrown/hours/pb";
+
+service HoursService {
+  rpc CreateCourse(CreateCourseRequest) returns (CreateCourseResponse);
+
+  rpc UpdateCourse(UpdateCourseRequest) returns (UpdateCourseResponse);
+
+  rpc DeleteCourse(DeleteCourseRequest) returns (DeleteCourseResponse);
+
+  rpc ArchiveCourse(ArchiveCourseRequest) returns (ArchiveCourseResponse);
+
+  rpc ArchiveCoursesByTerm(ArchiveCoursesByTermRequest) returns (ArchiveCoursesByTermResponse);
+
+  // Look up a queue by id.
+  rpc GetQueue(GetQueueRequest) returns (GetQueueResponse);
+
+  // Create a queue.
+  rpc CreateQueue(CreateQueueRequest) returns (CreateQueueResponse);
+
+  // Update an existing queue.
+  rpc UpdateQueue(UpdateQueueRequest) returns (UpdateQueueResponse);
+
+  // Delete a queue permanently.
+  rpc DeleteQueue(DeleteQueueRequest) returns (DeleteQueueResponse);
+}
+
+message CreateCourseRequest {
+  Course.CourseOptions course_options = 1;
+}
+
+message CreateCourseResponse {
+  bool created = 1;
+  Course course = 2;
+}
+
+message UpdateCourseRequest {
+  Course.CourseOptions course_options = 1;
+}
+
+message UpdateCourseResponse {
+  bool updated = 1;
+  Course old_course = 2;
+}
+
+message DeleteCourseRequest {
+  string course_id = 1;
+}
+
+message DeleteCourseResponse {
+  bool deleted = 1;
+  Course deleted_course = 2;
+}
+
+message ArchiveCourseRequest {
+  string course_id = 1;
+}
+
+message ArchiveCourseResponse {
+  bool archived = 1;
+}
+
+message ArchiveCoursesByTermRequest {
+  string term = 1;
+}
+
+message ArchiveCoursesByTermResponse {
+  bool archived = 1;
+}
+
+
+message GetQueueRequest {
+  string queue_id = 1;
+}
+
+message GetQueueResponse {
+  Queue queue = 1;
+}
+
+message CreateQueueRequest {
+  string course_id = 1;
+  Queue.QueueOptions queue_options = 2;
+}
+
+message CreateQueueResponse {
+  Queue queue = 1;
+}
+
+message UpdateQueueRequest {
+  string queue_id = 1;
+  Queue.QueueOptions queue_options = 2;
+}
+
+message UpdateQueueResponse {
+  // The QueueOptions before the updates were applied.
+  Queue.QueueOptions old_queue_options = 1;
+}
+
+message DeleteQueueRequest {
+  string queue_id = 1;
+}
+
+message DeleteQueueResponse {
+  // The deleted queue ID.
+  string queue_id = 1;
+}
+
