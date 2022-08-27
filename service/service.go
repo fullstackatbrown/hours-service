@@ -15,7 +15,7 @@ type service struct {
 
 // CreateCourse creates a new course with the given options.
 func (s *service) CreateCourse(ctx context.Context, createCourseRequest *pb.CreateCourseRequest) (*pb.CreateCourseResponse, error) {
-	return nil, errors.NotYetImplementedError("Implement me!")
+	return nil, errors.NotYetImplementedError("Implement me!!")
 }
 
 // UpdateCourse updates an existing course's options.

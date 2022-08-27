@@ -7,6 +7,8 @@ WORKDIR /app
 
 COPY . ./
 
+RUN go build .
+
 EXPOSE ${PORT}
 
-ENTRYPOINT go run . -port=${PORT}
+ENTRYPOINT ./hours -port=${PORT}
